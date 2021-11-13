@@ -7,6 +7,7 @@ class Merchants::BulkDiscountsController < ApplicationController
 
   # GET /bulk_discounts/1 or /bulk_discounts/1.json
   def show
+    set_bulk_discount
   end
 
   # GET /bulk_discounts/new
