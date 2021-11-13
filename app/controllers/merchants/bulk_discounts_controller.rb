@@ -49,9 +49,10 @@ class Merchants::BulkDiscountsController < ApplicationController
 
   # DELETE /bulk_discounts/1 or /bulk_discounts/1.json
   def destroy
+    set_bulk_discount
     @bulk_discount.destroy
     respond_to do |format|
-      format.html { redirect_to bulk_discounts_url, notice: "Bulk discount was successfully destroyed." }
+      format.html { redirect_to "/merchants/#{@bulk_discount.merchant.id}/bulk_discounts", notice: "Bulk discount was successfully destroyed." }
       format.json { head :no_content }
     end
   end

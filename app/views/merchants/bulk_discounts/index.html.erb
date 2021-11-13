@@ -8,7 +8,6 @@
       <th>Name</th>
       <th>Percent discount</th>
       <th>Quantity threshold</th>
-      <th>Merchant</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,9 +18,8 @@
         <td><%= link_to "#{bulk_discount.name}", bulk_discount_path %></td>
         <td><%= "#{(bulk_discount.percent_discount * 100).to_i}%" %></td>
         <td><%= bulk_discount.quantity_threshold %></td>
-        <td><%= bulk_discount.merchant %></td>
-        <td><%= link_to 'Edit', edit_bulk_discount_path(bulk_discount) %></td>
-        <td><%= link_to 'Destroy', bulk_discount_path(bulk_discount), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_bulk_discount_path(@merchant) %></td>
+        <td><%= link_to "Delete #{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", method: :delete%></td>
       </tr>
     <% end %>
   </tbody>
