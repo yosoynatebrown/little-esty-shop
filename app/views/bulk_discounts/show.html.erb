@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Percent discount:</strong>
+  <%= @bulk_discount.percent_discount %>
+</p>
+
+<p>
+  <strong>Quantity threshold:</strong>
+  <%= @bulk_discount.quantity_threshold %>
+</p>
+
+<p>
+  <strong>Merchant:</strong>
+  <%= @bulk_discount.merchant %>
+</p>
+
+<%= link_to 'Edit', edit_bulk_discount_path(@bulk_discount) %> |
+<%= link_to 'Back', bulk_discounts_path %>

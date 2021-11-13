@@ -1,0 +1,32 @@
+<%= form_with(model: bulk_discount, local: true) do |form| %>
+  <% if bulk_discount.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bulk_discount.errors.count, "error") %> prohibited this bulk_discount from being saved:</h2>
+
+      <ul>
+      <% bulk_discount.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :percent_discount %>
+    <%= form.text_field :percent_discount %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity_threshold %>
+    <%= form.number_field :quantity_threshold %>
+  </div>
+
+  <div class="field">
+    <%= form.label :merchant_id %>
+    <%= form.text_field :merchant_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
