@@ -1,4 +1,4 @@
-class BulkDiscountsController < ApplicationController
+class Merchants::BulkDiscountsController < ApplicationController
 
   def index
     @merchant = Merchant.find(params[:id])
@@ -11,6 +11,7 @@ class BulkDiscountsController < ApplicationController
 
   # GET /bulk_discounts/new
   def new
+    @merchant = Merchant.find(params[:id])
     @bulk_discount = BulkDiscount.new
   end
 
@@ -21,11 +22,11 @@ class BulkDiscountsController < ApplicationController
   # POST /bulk_discounts or /bulk_discounts.json
   def create
     @bulk_discount = BulkDiscount.new(bulk_discount_params)
+    @merchant = Merchant.find(bulk_discount_params[:merchant_id])
 
     respond_to do |format|
       if @bulk_discount.save
-        format.html { redirect_to @bulk_discount, notice: "Bulk discount was successfully created." }
-        format.json { render :show, status: :created, location: @bulk_discount }
+        format.html { redirect_to bulk_discounts_path(@merchant), notice: "Bulk discount was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @bulk_discount.errors, status: :unprocessable_entity }

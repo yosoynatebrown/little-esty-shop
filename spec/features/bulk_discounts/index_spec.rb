@@ -25,8 +25,18 @@ RSpec.describe "bulk discounts index" do
 
   it 'should have the next 3 holidays displayed' do
     visit "merchants/#{@merchant.id}/bulk_discounts"
-    
+
+    expect(page).to have_content("Upcoming Holidays")
+
     expect("Thanksgiving Day").to appear_before("Christmas Day")
     expect("Christmas Day").to appear_before("New Year's Day")
+  end
+
+  it 'should have a working new bulk discount link' do
+    visit "merchants/#{@merchant.id}/bulk_discounts"
+
+    click_link 'New Bulk Discount'
+
+    expect(current_path).to eq(new_bulk_discount_path(@merchant))
   end
 end

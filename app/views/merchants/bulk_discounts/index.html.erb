@@ -16,12 +16,12 @@
   <tbody>
     <% @merchant.bulk_discounts.each do |bulk_discount| %>
       <tr>
-        <td><%= link_to "#{bulk_discount.name}", merchant_bulk_discount_path %></td>
+        <td><%= link_to "#{bulk_discount.name}", bulk_discount_path %></td>
         <td><%= "#{(bulk_discount.percent_discount * 100).to_i}%" %></td>
         <td><%= bulk_discount.quantity_threshold %></td>
         <td><%= bulk_discount.merchant %></td>
-        <td><%= link_to 'Edit', edit_merchant_bulk_discount_path(bulk_discount) %></td>
-        <td><%= link_to 'Destroy', merchant_bulk_discount_path(bulk_discount), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_bulk_discount_path(bulk_discount) %></td>
+        <td><%= link_to 'Destroy', bulk_discount_path(bulk_discount), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,7 +29,7 @@
 
 <br>
 
-<%= link_to 'New Bulk Discount',  new_merchant_bulk_discount_path %>
+<%= link_to 'New Bulk Discount',  new_bulk_discount_path %>
 
 <h3>Upcoming Holidays</h3>
 <ul>
