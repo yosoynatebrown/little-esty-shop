@@ -13,17 +13,18 @@ class Merchants::BulkDiscountsController < ApplicationController
   # GET /bulk_discounts/new
   def new
     @merchant = Merchant.find(params[:id])
-    @bulk_discount = BulkDiscount.new
+    @bulk_discount = @merchant.bulk_discounts.new
   end
 
   # GET /bulk_discounts/1/edit
   def edit
+    set_bulk_discount
   end
 
   # POST /bulk_discounts or /bulk_discounts.json
   def create
     @bulk_discount = BulkDiscount.new(bulk_discount_params)
-    @merchant = Merchant.find(bulk_discount_params[:merchant_id])
+    @merchant = Merchant.find(@bulk_discount.merchant.id)
 
     respond_to do |format|
       if @bulk_discount.save
@@ -37,10 +38,11 @@ class Merchants::BulkDiscountsController < ApplicationController
 
   # PATCH/PUT /bulk_discounts/1 or /bulk_discounts/1.json
   def update
+    set_bulk_discount
+
     respond_to do |format|
       if @bulk_discount.update(bulk_discount_params)
-        format.html { redirect_to @bulk_discount, notice: "Bulk discount was successfully updated." }
-        format.json { render :show, status: :ok, location: @bulk_discount }
+        format.html { redirect_to "/merchants/#{@bulk_discount.merchant_id}/bulk_discounts/#{@bulk_discount.id}", notice: "Bulk discount was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @bulk_discount.errors, status: :unprocessable_entity }
