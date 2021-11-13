@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :bulk_discounts
+  namespace :merchant do
+    resources :bulk_discounts
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'welcome#index'
@@ -15,6 +17,9 @@ Rails.application.routes.draw do
 
   get '/merchants/:id/invoices', to: 'merchant_invoices#index'
   get '/merchants/:id/invoices/:inv_id', to: 'merchant_invoices#show'
+
+  get '/merchants/:id/bulk_discounts', to: 'bulk_discounts#index'
+  get '/merchants/:id/bulk_discounts/new', to: 'bulk_discounts#new'
 
   resources :invoice_items, only: [:update]
 

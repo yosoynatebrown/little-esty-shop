@@ -1,9 +1,7 @@
 class BulkDiscountsController < ApplicationController
-  before_action :set_bulk_discount, only: %i[ show edit update destroy ]
 
-  # GET /bulk_discounts or /bulk_discounts.json
   def index
-    @bulk_discounts = BulkDiscount.all
+    @merchant = Merchant.find(params[:id])
   end
 
   # GET /bulk_discounts/1 or /bulk_discounts/1.json
@@ -64,6 +62,6 @@ class BulkDiscountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bulk_discount_params
-      params.require(:bulk_discount).permit(:percent_discount, :quantity_threshold, :merchant_id)
+      params.require(:bulk_discount).permit(:percent_discount, :quantity_threshold, :merchant_id, :name)
     end
 end

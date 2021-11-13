@@ -1,5 +1,4 @@
 require 'rails_helper'
-# FactoryBot.find_definitions
 
 RSpec.describe 'merchant dashboard show page' do
   before(:each) do
@@ -53,5 +52,13 @@ RSpec.describe 'merchant dashboard show page' do
     expect(page).to have_content(@merchant.shippable_items.first.name)
     expect(page).to have_content(DateTime.now.new_offset(0).strftime("%A, %B %d, %Y"))
     expect(@merchant.shippable_items.first.name).to appear_before(@merchant.shippable_items.last.name)
+  end
+
+  it 'should have a link to bulk discounts index page' do 
+    visit "/merchants/#{@merchant.id}/dashboard"
+
+    click_link "My Bulk Discounts"
+
+    expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts")
   end
 end
