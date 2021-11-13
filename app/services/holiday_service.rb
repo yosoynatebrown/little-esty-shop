@@ -1,5 +1,5 @@
 class HolidayService
-  def self.top_3_holidays
+  def self.next_3_holidays
     content = conn.get
     body = parse_response(content)
     body.first(3).map do |holiday_hash|

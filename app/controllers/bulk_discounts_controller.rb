@@ -2,6 +2,7 @@ class BulkDiscountsController < ApplicationController
 
   def index
     @merchant = Merchant.find(params[:id])
+    @holidays = HolidayService.next_3_holidays
   end
 
   # GET /bulk_discounts/1 or /bulk_discounts/1.json

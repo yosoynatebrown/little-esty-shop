@@ -22,4 +22,11 @@ RSpec.describe "bulk discounts index" do
     expect(page).to have_content("#{(@discount2.percent_discount * 100).to_i}")
     expect(page).to have_content("#{@discount2.quantity_threshold}")
   end
+
+  it 'should have the next 3 holidays displayed' do
+    visit "merchants/#{@merchant.id}/bulk_discounts"
+    
+    expect("Thanksgiving Day").to appear_before("Christmas Day")
+    expect("Christmas Day").to appear_before("New Year's Day")
+  end
 end

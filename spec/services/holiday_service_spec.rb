@@ -9,7 +9,7 @@ RSpec.describe GithubService do
     allow_any_instance_of(Faraday::Connection).to receive(:get).and_return(Faraday::Response.new)
     allow_any_instance_of(Faraday::Response).to receive(:body).and_return(mock_response)
 
-    holidays = HolidayService.top_3_holidays
+    holidays = HolidayService.next_3_holidays
 
     expect(holidays).to eq(["Thanksgiving Day", "Christmas Day", "New Year's Day"])
   end
