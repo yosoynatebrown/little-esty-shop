@@ -20,7 +20,7 @@ class Invoice < ApplicationRecord
                             .first
                             .created_at }
 
-  def invoice_revenue
+  def total_revenue
     invoice_items.invoice_item_revenue
   end
 

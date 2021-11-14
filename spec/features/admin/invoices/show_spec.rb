@@ -4,14 +4,20 @@ require 'rails_helper'
 RSpec.describe "admin invoice show page" do
   before :each do
     @customer = create(:customer)
+    @merchant1 = create(:merchant)
+    @merchant2 = create(:merchant)
 
     @invoice = create(:invoice, customer: @customer, created_at: "2012-03-25 09:54:09 UTC", status: 0)
 
-    @item1 = create(:item)
-    @item2 = create(:item)
+    @item1 = create(:item, merchant: @merchant1)
+    @item2 = create(:item, merchant: @merchant1)
+    @item3 = create(:item, merchant: @merchant2)
+    @item4 = create(:item, merchant: @merchant2)
 
     @invoice_item1 = create(:invoice_item, invoice: @invoice, item: @item1, quantity: 1, unit_price: 1000)
     @invoice_item2 = create(:invoice_item, invoice: @invoice, item: @item2, quantity: 10, unit_price: 200)
+    @invoice_item3 = create(:invoice_item, invoice: @invoice, item: @item3, quantity: 4, unit_price: 1000)
+    @invoice_item4 = create(:invoice_item, invoice: @invoice, item: @item4, quantity: 10, unit_price: 200)
   end
 
   it 'show invoice information' do
@@ -41,7 +47,7 @@ RSpec.describe "admin invoice show page" do
   it 'displays the total revenue for the invoice' do
     visit "/admin/invoices/#{@invoice.id}"
 
-    expect(page).to have_content("Total Revenue: $30.00")
+    expect(page).to have_content("Total Revenue: $90.00")
   end
 
   it 'has a dropdown form to update the status' do
@@ -56,5 +62,15 @@ RSpec.describe "admin invoice show page" do
       click_button "Submit"
       expect(page).to have_content('Status: in progress')
     end
+  end
+
+  it 'has the discounted revenue' do
+    @discount1 = create(:bulk_discount, merchant: @merchant1, percent_discount: 0.2, quantity_threshold: 5)
+    @discount2 = create(:bulk_discount, merchant: @merchant2, percent_discount: 0.3, quantity_threshold: 5)
+
+    visit "/admin/invoices/#{@invoice.id}"
+
+      
+    expect(page).to have_content("Discounted Revenue: $80.00")
   end
 end
