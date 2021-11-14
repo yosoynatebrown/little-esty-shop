@@ -46,9 +46,9 @@ RSpec.describe Invoice, type: :model do
       @invoice_item2 = create(:invoice_item, invoice: @invoice, item: @item2, unit_price: 2, quantity: 10)
       @invoice_item3 = create(:invoice_item, invoice: @invoice, item: @item3, unit_price: 1, quantity: 20)    end
 
-    describe '#invoice_revenue' do
+    describe '#total_revenue' do
       it 'returns the revenue of the invoices belonging to an invoice' do
-        expect(@invoice.invoice_revenue).to eq 50
+        expect(@invoice.total_revenue).to eq 50
       end
     end
 
