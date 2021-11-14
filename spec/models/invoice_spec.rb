@@ -37,14 +37,14 @@ RSpec.describe Invoice, type: :model do
 
   describe 'instance methods' do
     before :each do
-      @invoice = create(:invoice)
       @merchant = create(:merchant)
+      @item1, @item2, @item3 = create_list(:item, 3, merchant: @merchant)
+      @invoice = create(:invoice)
       @discount = create(:bulk_discount, merchant: @merchant, percent_discount: 0.2, quantity_threshold: 12)
 
-      @invoice_item1 = create(:invoice_item, invoice: @invoice, unit_price: 1, quantity: 10)
-      @invoice_item2 = create(:invoice_item, invoice: @invoice, unit_price: 2, quantity: 10)
-      @invoice_item3 = create(:invoice_item, invoice: @invoice, unit_price: 1, quantity: 20)
-    end
+      @invoice_item1 = create(:invoice_item, invoice: @invoice, item: @item1, unit_price: 1, quantity: 10)
+      @invoice_item2 = create(:invoice_item, invoice: @invoice, item: @item2, unit_price: 2, quantity: 10)
+      @invoice_item3 = create(:invoice_item, invoice: @invoice, item: @item3, unit_price: 1, quantity: 20)    end
 
     describe '#invoice_revenue' do
       it 'returns the revenue of the invoices belonging to an invoice' do
@@ -53,7 +53,7 @@ RSpec.describe Invoice, type: :model do
     end
 
     describe '#discounted_invoice_revenue' do
-      xit 'returns the revenue of the invoices belonging to an invoice' do
+      it 'returns the revenue of the invoices belonging to an invoice' do
         expect(@invoice.discounted_invoice_revenue).to eq 46
       end
     end

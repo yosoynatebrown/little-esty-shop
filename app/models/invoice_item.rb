@@ -29,7 +29,9 @@ class InvoiceItem < ApplicationRecord
     .where('quantity_threshold <= ?', quantity)
     .order(percent_discount: :desc)
     .limit(1)
+
     return (unit_price * quantity) if matching_discount.empty?
+    
     (1 - matching_discount.first.percent_discount) * unit_price * quantity
   end
 end
