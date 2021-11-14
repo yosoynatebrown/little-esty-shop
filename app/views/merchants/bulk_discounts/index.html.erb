@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bulk Discounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Percent discount</th>
+      <th>Quantity threshold</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @merchant.bulk_discounts.each do |bulk_discount| %>
+      <tr>
+        <td><%= link_to "#{bulk_discount.name}", bulk_discount_path %></td>
+        <td><%= "#{(bulk_discount.percent_discount * 100).to_i}%" %></td>
+        <td><%= bulk_discount.quantity_threshold %></td>
+        <td><%= link_to 'Edit', edit_bulk_discount_path(@merchant) %></td>
+        <td><%= link_to "Delete #{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", method: :delete%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bulk Discount',  new_bulk_discount_path %>
+
+<h3>Upcoming Holidays</h3>
+<ul>
+<% @holidays.each do |holiday|%>
+  <li><%= holiday %></li>
+<% end %>
+</ul>
