@@ -3,6 +3,7 @@
 <p>Created On: <%= @invoice.created_at.strftime("%A, %B %d, %Y") %></p>
 
 <p>Total Revenue: <%= number_to_currency(@invoice.invoice_revenue/100.0)%></p>
+<p>Discounted Revenue: <%= number_to_currency(@invoice.discounted_invoice_revenue/100.0)%></p>
 
 
 <p>Customer: <%= "#{@invoice.customer.first_name} #{@invoice.customer.last_name}" %></p>
@@ -19,6 +20,9 @@
       <p>Status: <%= item.invoice_item_status(@invoice) %></p> <%= form_for(item.invoice_item(@invoice)) do |f| %>
       <%= f.label :change_status %>
       <%= f.select(:status, options_for_select([['packaged', 'packaged'], ['pending', 'pending'], ['shipped', 'shipped']]), { include_blank: true }, onchange: 'this.form.submit()') %>
+      <% end %>
+      <% if item.invoice_item(@invoice).bulk_discount_id != 'No discount applied'%>
+      <p><%= link_to "Discount applied to #{item.name}", "/merchants/#{item.merchant_id}/bulk_discounts/#{item.invoice_item(@invoice).bulk_discount_id}" %></p>
       <% end %>
   </div>
 <% end %>
