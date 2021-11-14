@@ -21,6 +21,13 @@ class Invoice < ApplicationRecord
                             .created_at }
 
   def invoice_revenue
-    invoice_items.invoice_item_revenue
+    wip = invoice_items.invoice_item_revenue
+  end
+
+  def discounted_invoice_revenue
+    wip = items.joins(merchant: :bulk_discounts)
+                 .select('invoice_items.quantity, merchants.id, bulk_discounts.*, MAX(bulk_discounts.quantity_threshold) AS max_quantity_threshold')
+                 .group('bulk_discounts.id')
+                 .where('invoice_items.quantity >= max_quantity_threshold')
   end
 end

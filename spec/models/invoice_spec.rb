@@ -19,13 +19,13 @@ RSpec.describe Invoice, type: :model do
       @incomplete_invoice_2 = create(:invoice, created_at: "2011-03-25 09:54:09 UTC")
     end
 
-    describe '#highest_date' do
+    describe '.highest_date' do
       it 'should return the date with the highest number of invoices' do
         expect(Invoice.highest_date).to eq(@invoice2.created_at)
       end
     end
 
-    describe '#incomplete_invoices' do
+    describe '.incomplete_invoices' do
       it 'returns all incomplete_invoices' do
         invoice_item1 = create(:invoice_item, invoice: @completed_invoice, status: 2)
         invoice_item2 = create(:invoice_item, invoice: @incomplete_invoice_1, status: 0)
@@ -38,14 +38,23 @@ RSpec.describe Invoice, type: :model do
   describe 'instance methods' do
     before :each do
       @invoice = create(:invoice)
+      @merchant = create(:merchant)
+      @discount = create(:bulk_discount, merchant: @merchant, percent_discount: 0.2, quantity_threshold: 12)
 
       @invoice_item1 = create(:invoice_item, invoice: @invoice, unit_price: 1, quantity: 10)
       @invoice_item2 = create(:invoice_item, invoice: @invoice, unit_price: 2, quantity: 10)
+      @invoice_item3 = create(:invoice_item, invoice: @invoice, unit_price: 1, quantity: 20)
     end
 
-    describe '.invoice_revenue' do
+    describe '#invoice_revenue' do
       it 'returns the revenue of the invoices belonging to an invoice' do
-        expect(@invoice.invoice_revenue).to eq 30
+        expect(@invoice.invoice_revenue).to eq 50
+      end
+    end
+
+    describe '#discounted_invoice_revenue' do
+      xit 'returns the revenue of the invoices belonging to an invoice' do
+        expect(@invoice.discounted_invoice_revenue).to eq 46
       end
     end
   end
