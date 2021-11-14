@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 100.times do
-  discount = BulkDiscount.create!(
+  BulkDiscount.create(
     name: "#{Faker::Company.bs.titleize} Discount",
     percent_discount: Faker::Number.decimal(l_digits: 0, r_digits: 2),
     quantity_threshold: Faker::Number.between(from: 1, to: 10),
