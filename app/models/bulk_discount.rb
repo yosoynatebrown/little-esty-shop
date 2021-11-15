@@ -3,4 +3,5 @@ class BulkDiscount < ApplicationRecord
   validates :name, presence: true
   validates :percent_discount, presence: true
   validates :quantity_threshold, presence: true
+  validates_with BulkDiscountValidator
 end
