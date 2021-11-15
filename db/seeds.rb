@@ -9,7 +9,7 @@
 100.times do
   BulkDiscount.create(
     name: "#{Faker::Company.bs.titleize} Discount",
-    percent_discount: Faker::Number.decimal(l_digits: 0, r_digits: 2),
-    quantity_threshold: Faker::Number.between(from: 1, to: 10),
+    percent_discount: Faker::Number.between(from:0.0, to:0.5).round(2),
+    quantity_threshold: Faker::Number.between(from: 1, to: 20),
     merchant: Merchant.order('RANDOM()').first)
 end

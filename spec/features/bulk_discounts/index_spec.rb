@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "bulk discounts index" do
   before(:each) do
   @merchant = create(:merchant)
-  @discount1, @discount2 = create_list(:bulk_discount, 2, merchant: @merchant)
+  @discount1 = create(:bulk_discount, percent_discount: 0.1, quantity_threshold: 10, merchant: @merchant)
+  @discount2 = create(:bulk_discount, percent_discount: 0.2 , quantity_threshold: 20, merchant: @merchant)
   end
 
   it 'should include all bulk discounts with links to BD show page' do 

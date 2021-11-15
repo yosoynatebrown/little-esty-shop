@@ -39,10 +39,6 @@ RSpec.describe 'show page' do
     expect(page).to have_content(@invoice.items.first.invoice_item_status(@invoice))
   end
 
-  xit 'shows invoice total revenue' do
-    expect(page).to have_content("$", count: 3)
-  end
-
   it 'shows dropdown for changing status' do
     expect(page).to have_content('packaged pending shipped')
     expect(page).to have_content('Change status')
