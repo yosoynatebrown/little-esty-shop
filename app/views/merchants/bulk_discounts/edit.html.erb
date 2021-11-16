@@ -3,6 +3,5 @@
 
 <%= render partial: 'form', locals: {bulk_discount: @bulk_discount} %>
 
-<%= link_to 'Show', @bulk_discount %> |
-<%= link_to 'Back', bulk_discounts_path %>
+<%= link_to 'Show', bulk_discount_path(@bulk_discount) %>
 </div>
