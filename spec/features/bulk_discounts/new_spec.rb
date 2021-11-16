@@ -26,8 +26,7 @@ RSpec.describe "bulk discount new page", type: :view do
 
         click_button 'Create Bulk discount'
 
-        expect(current_path).to eq(new_bulk_discount_path(@merchant))
-        expect(page).to have_content("Bulk discount was successfully created.")
+        expect(page).to have_content("Error: Name can't be blank, Percent discount can't be blank, Quantity threshold can't be blank")
       end
     end
   end

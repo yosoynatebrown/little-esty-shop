@@ -48,7 +48,7 @@ class Merchants::BulkDiscountsController < ApplicationController
         format.html { redirect_to "/merchants/#{@bulk_discount.merchant_id}/bulk_discounts/#{@bulk_discount.id}", notice: "Bulk discount was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @bulk_discount.errors, status: :unprocessable_entity }
+        flash[:alert] = "Error: #{error_message(@bulk_discount.errors)}"
       end
     end
   end
