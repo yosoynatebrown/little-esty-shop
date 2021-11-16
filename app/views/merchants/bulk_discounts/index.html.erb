@@ -27,11 +27,11 @@
 
 <br>
 
-<%= link_to 'New Bulk Discount',  new_bulk_discount_path %>
+<%= link_to 'New Bulk Discount',  new_bulk_discount_path(@merchant) %>
 
 <h3>Upcoming Holidays</h3>
 <ul>
 <% @holidays.each do |holiday|%>
-  <li><%= holiday %></li>
+  <li><%= holiday %> <%= button_to "Create #{holiday} Discount", new_bulk_discount_path(@merchant), params:{ holiday_name: "#{holiday} discount", percent_discount: 0.3, quantity_threshold: 2 }, method: :get %></li>
 <% end %>
 </ul>
