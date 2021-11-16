@@ -14,10 +14,10 @@
   <tbody>
     <% @merchant.bulk_discounts.each do |bulk_discount| %>
       <tr>
-        <td><strong><%= link_to "#{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %></strong></td>
+        <td><strong><%= link_to "#{bulk_discount.name}", bulk_discount_path(@merchant, bulk_discount) %></strong></td>
         <td><%= "#{(bulk_discount.percent_discount * 100).to_i}%" %></td>
         <td><%= bulk_discount.quantity_threshold %></td>
-        <td><%= link_to "Delete #{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", class:'btn btn-secondary btn-sm', method: :delete%></td>
+        <td><%= link_to "Delete #{bulk_discount.name}", bulk_discount_path(@merchant, bulk_discount), class:'btn btn-secondary btn-sm', method: :delete %></td>
       </tr>
     <% end %>
   </tbody>

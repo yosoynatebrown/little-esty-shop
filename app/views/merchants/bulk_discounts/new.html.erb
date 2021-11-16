@@ -3,5 +3,5 @@
 
 <%= render 'form', bulk_discount: @bulk_discount %>
 
-<%= link_to 'Back', bulk_discounts_path %>
+<%= link_to 'Back', bulk_discounts_path(@merchant, @bulk_discount) %>
 </div>
