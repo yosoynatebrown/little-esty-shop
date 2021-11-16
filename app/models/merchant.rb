@@ -36,4 +36,8 @@ class Merchant < ApplicationRecord
          .first
          .invoice_created_at
   end
+
+  def find_holiday_discount(holiday)
+    bulk_discounts.find_by(name: "#{holiday} discount")
+  end
 end
