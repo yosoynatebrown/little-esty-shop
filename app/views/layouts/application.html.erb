@@ -12,10 +12,11 @@
   <body>
     <% flag = false %>
     <h3>Little Esty Shop</h3>
-    <p>GitHub Stats</p>
+    
     <% if flag %>
-      <p>Repo name: <%= GithubService.repo_name %></p>
-      <p>Total PR Count: <%= GithubService.merged_pr_count %></p>
+    <p>GitHub Stats</p>
+      <p>Repo name: <%= GithubService.try(:repo_name) %></p>
+      <p>Total PR Count: <%= GithubService.try(:merged_pr_count) %></p>
       <p>Individual contributors:</p>
       <ul>
         <% GithubService.contributors.each do |login, commits| %>
