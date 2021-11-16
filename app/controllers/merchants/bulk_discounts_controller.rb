@@ -13,7 +13,11 @@ class Merchants::BulkDiscountsController < ApplicationController
   # GET /bulk_discounts/new
   def new
     @merchant = Merchant.find(params[:id])
-    @bulk_discount = @merchant.bulk_discounts.new
+    if params[:holiday_name]
+      @bulk_discount = @merchant.bulk_discounts.new(name: params[:holiday_name], percent_discount: params[:percent_discount], quantity_threshold: params[:quantity_threshold])
+    else
+      @bulk_discount = @merchant.bulk_discounts.new
+    end
   end
 
   # GET /bulk_discounts/1/edit

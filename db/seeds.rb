@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+BulkDiscount.destroy_all
 100.times do
   BulkDiscount.create(
     name: "#{Faker::Company.bs.titleize} Discount",

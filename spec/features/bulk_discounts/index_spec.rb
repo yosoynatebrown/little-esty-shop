@@ -49,4 +49,36 @@ RSpec.describe "bulk discounts index" do
     expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts")
     expect(page).not_to have_content("#{@discount1.name}")
   end
+
+  it 'should have create discount buttons for each holiday' do 
+    visit "merchants/#{@merchant.id}/bulk_discounts"
+
+    expect(page).to have_button('Create Thanksgiving Day Discount')
+    expect(page).to have_button('Create Christmas Day Discount')
+
+    click_button "Create New Year's Day Discount"
+
+    expect(current_path).to eq(new_bulk_discount_path(@merchant))
+
+    click_button 'Save'
+
+    expect(page).to have_content("30% 2")
+    expect(page).to have_content("New Year's Day discount") #lower case discount ensures we are not testing button
+  end
+
+  it 'allows you to enter different information for holiday discount' do
+    visit "merchants/#{@merchant.id}/bulk_discounts"
+
+    click_button "Create Christmas Day Discount"
+
+    expect(current_path).to eq(new_bulk_discount_path(@merchant))
+
+    fill_in 'Percent discount', with: "0.7"
+    fill_in 'Quantity threshold', with: "50"
+
+    click_button 'Save'
+
+    expect(page).to have_content("70% 50")
+    expect(page).to have_content("Christmas Day discount")
+  end
 end
