@@ -35,9 +35,9 @@
   <li><%= holiday %> 
   <% holiday_discount = @merchant.find_holiday_discount(holiday)%>
   <% if holiday_discount.present? %>
-    <%= link_to 'View Discount', bulk_discount_path(holiday_discount) %>
+    <p><%= link_to 'View Discount', bulk_discount_path(holiday_discount) %></p>
   <% else %>
-  <%= button_to "Create #{holiday} Discount", new_bulk_discount_path(@merchant), params:{ holiday_name: "#{holiday} discount", percent_discount: 0.3, quantity_threshold: 2 }, method: :get %></li>
+  <p><%= button_to "Create #{holiday} Discount", new_bulk_discount_path(@merchant), params:{ holiday_name: "#{holiday} discount", percent_discount: 0.3, quantity_threshold: 2 }, method: :get %></p></li>
   <% end %>
 <% end %>
 </ul>
