@@ -60,7 +60,7 @@ RSpec.describe "bulk discounts index" do
 
     expect(current_path).to eq(new_bulk_discount_path(@merchant))
 
-    click_button 'Save'
+    click_button 'Create Bulk discount'
 
     expect(page).to have_content("30% 2")
     expect(page).to have_content("New Year's Day discount") #lower case discount ensures we are not testing button
@@ -76,7 +76,7 @@ RSpec.describe "bulk discounts index" do
     fill_in 'Percent discount', with: "0.7"
     fill_in 'Quantity threshold', with: "50"
 
-    click_button 'Save'
+    click_button 'Create Bulk discount'
 
     expect(page).to have_content("70% 50")
     expect(page).to have_content("Christmas Day discount")
@@ -89,7 +89,7 @@ RSpec.describe "bulk discounts index" do
 
     expect(current_path).to eq(new_bulk_discount_path(@merchant))
 
-    click_button 'Save'
+    click_button 'Create Bulk discount'
 
     expect(page).not_to have_button("Create Thanksgiving Day Discount")
     
