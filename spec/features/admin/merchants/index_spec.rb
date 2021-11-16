@@ -73,22 +73,22 @@ RSpec.describe 'admin merchants index' do
     invoices6 = create_list(:invoice, 3, customer: customer)
 
     items1.zip(invoices1) do |item, invoice|
-      create(:invoice_item, quantity: 1, unit_price: 300, item: item, invoice: invoice)
+      create(:invoice_item, quantity: 100, unit_price: 300000, item: item, invoice: invoice)
     end
     items2.zip(invoices2) do |item, invoice|
-      create(:invoice_item, quantity: 1, unit_price: 200, item: item, invoice: invoice)
+      create(:invoice_item, quantity: 100, unit_price: 200000, item: item, invoice: invoice)
     end
     items3.zip(invoices3) do |item, invoice|
-      create(:invoice_item, quantity: 1, unit_price: 500, item: item, invoice: invoice)
+      create(:invoice_item, quantity: 100, unit_price: 500000, item: item, invoice: invoice)
     end
     items4.zip(invoices4) do |item, invoice|
-      create(:invoice_item, quantity: 1, unit_price: 600, item: item, invoice: invoice)
+      create(:invoice_item, quantity: 100, unit_price: 600000, item: item, invoice: invoice)
     end
     items5.zip(invoices5) do |item, invoice|
-      create(:invoice_item, quantity: 1, unit_price: 100, item: item, invoice: invoice)
+      create(:invoice_item, quantity: 100, unit_price: 100000, item: item, invoice: invoice)
     end
     items6.zip(invoices6) do |item, invoice|
-      create(:invoice_item, quantity: 1, unit_price: 400, item: item, invoice: invoice)
+      create(:invoice_item, quantity: 100, unit_price: 400000, item: item, invoice: invoice)
     end
 
     Invoice.all.each do |invoice|
@@ -106,11 +106,11 @@ RSpec.describe 'admin merchants index' do
       expect(merchant1.name).to appear_before(merchant2.name)
       expect(page).to_not have_content(merchant5.name)
 
-      expect(page).to have_content("$#{top_merchants[0].total_revenue/100.0}0")
-      expect(page).to have_content("$#{top_merchants[1].total_revenue/100.0}0")
-      expect(page).to have_content("$#{top_merchants[2].total_revenue/100.0}0")
-      expect(page).to have_content("$#{top_merchants[3].total_revenue/100.0}0")
-      expect(page).to have_content("$#{top_merchants[4].total_revenue/100.0}0")
+      expect(page).to have_content("$1,800,000.00")
+      expect(page).to have_content("$1,500,000.00")
+      expect(page).to have_content("$1,200,000.00")
+      expect(page).to have_content("$900,000.00")
+      expect(page).to have_content("$600,000.00")
     end
   end
 
@@ -133,7 +133,7 @@ RSpec.describe 'admin merchants index' do
 
     visit admin_merchants_path
     within("#top_five_merchants") do
-      expect(page).to have_content("Top selling date for this merchant was: Sunday, March 11, 2012")
+      expect(page).to have_content("Top selling date for this merchant was: Saturday, March 24, 2012")
     end
   end
 end

@@ -22,12 +22,7 @@ RSpec.describe Customer, type: :model do
 
   describe '#top_five_customers' do
     it 'returns the top five customers' do
-      customer1 = create(:customer)
-      customer2 = create(:customer)
-      customer3 = create(:customer)
-      customer4 = create(:customer)
-      customer5 = create(:customer)
-      customer6 = create(:customer)
+      customer1, customer2, customer3, customer4, customer5, customer6  = create_list(:customer, 6)
 
       invoice1 = create(:invoice, customer: customer1)
       invoice2 = create(:invoice, customer: customer2)
@@ -36,11 +31,11 @@ RSpec.describe Customer, type: :model do
       invoice5 = create(:invoice, customer: customer5)
       invoice6 = create(:invoice, customer: customer6)
 
-      create_list(:transaction, 5, result: 'success', invoice: invoice1)
-      create_list(:transaction, 4, result: 'success', invoice: invoice2)
-      create_list(:transaction, 3, result: 'success', invoice: invoice3)
-      create_list(:transaction, 2, result: 'success', invoice: invoice4)
-      create(:transaction, result: 'success', invoice: invoice5)
+      create_list(:transaction, 50, result: 'success', invoice: invoice1)
+      create_list(:transaction, 40, result: 'success', invoice: invoice2)
+      create_list(:transaction, 30, result: 'success', invoice: invoice3)
+      create_list(:transaction, 20, result: 'success', invoice: invoice4)
+      create_list(:transaction, 19, result: 'success', invoice: invoice5)
 
       expect(Customer.top_five_customers).to eq([ customer1,
                                                   customer2,

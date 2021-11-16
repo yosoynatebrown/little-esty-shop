@@ -34,16 +34,11 @@ RSpec.describe Merchant, type: :model do
     create(:invoice_item, invoice: @invoice5, status:'pending',item: @item5, quantity: 1, unit_price: 1)
     create(:invoice_item, invoice: @invoice6, status:'shipped', item: @item6, quantity: 1, unit_price: 3)
 
-    create(:transaction, result: 'success', invoice: @invoice1)
-    create(:transaction, result: 'success', invoice: @invoice1)
-    create(:transaction, result: 'success', invoice: @invoice2)
-    create(:transaction, result: 'success', invoice: @invoice2)
-    create(:transaction, result: 'success', invoice: @invoice3)
-    create(:transaction, result: 'success', invoice: @invoice3)
-    create(:transaction, result: 'success', invoice: @invoice4)
-    create(:transaction, result: 'success', invoice: @invoice4)
-    create(:transaction, result: 'success', invoice: @invoice5)
-    create(:transaction, result: 'success', invoice: @invoice5)
+    create_list(:transaction, 2, result: 'success', invoice: @invoice1)
+    create_list(:transaction, 2, result: 'success', invoice: @invoice2)
+    create_list(:transaction, 2, result: 'success', invoice: @invoice3)
+    create_list(:transaction, 2, result: 'success', invoice: @invoice4)
+    create_list(:transaction, 2, result: 'success', invoice: @invoice5)
   end
 
   describe '.enabled' do
@@ -56,7 +51,7 @@ RSpec.describe Merchant, type: :model do
   describe '.disabled' do
     it 'returns a collection of disabled items' do
       @merchant_2 = create(:merchant, status: 1)
-      expect(Merchant.disabled).to eq([@merchant])
+      expect(Merchant.disabled).to include(@merchant)
     end
   end
 
@@ -102,22 +97,22 @@ RSpec.describe Merchant, type: :model do
       invoices6 = create_list(:invoice, 3, customer: @customer1)
 
       items1.zip(invoices1) do |item, invoice|
-        create(:invoice_item, quantity: 1, unit_price: 300, item: item, invoice: invoice)
+        create(:invoice_item, quantity: 100, unit_price: 300000, item: item, invoice: invoice)
       end
       items2.zip(invoices2) do |item, invoice|
-        create(:invoice_item, quantity: 1, unit_price: 200, item: item, invoice: invoice)
+        create(:invoice_item, quantity: 100, unit_price: 200000, item: item, invoice: invoice)
       end
       items3.zip(invoices3) do |item, invoice|
-        create(:invoice_item, quantity: 1, unit_price: 500, item: item, invoice: invoice)
+        create(:invoice_item, quantity: 100, unit_price: 500000, item: item, invoice: invoice)
       end
       items4.zip(invoices4) do |item, invoice|
-        create(:invoice_item, quantity: 1, unit_price: 600, item: item, invoice: invoice)
+        create(:invoice_item, quantity: 100, unit_price: 600000, item: item, invoice: invoice)
       end
       items5.zip(invoices5) do |item, invoice|
-        create(:invoice_item, quantity: 1, unit_price: 100, item: item, invoice: invoice)
+        create(:invoice_item, quantity: 100, unit_price: 100000, item: item, invoice: invoice)
       end
       items6.zip(invoices6) do |item, invoice|
-        create(:invoice_item, quantity: 1, unit_price: 400, item: item, invoice: invoice)
+        create(:invoice_item, quantity: 100, unit_price: 400000, item: item, invoice: invoice)
       end
 
       Invoice.all.each do |invoice|

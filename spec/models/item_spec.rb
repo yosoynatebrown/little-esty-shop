@@ -16,12 +16,12 @@ RSpec.describe Item, type: :model do
 
     @transaction = create(:transaction, result: 'success', invoice: @invoice)
 
-    @invitem1 = create(:invoice_item, quantity: 10, unit_price: 1, status:"packaged", invoice: @invoice, item: @item1)
-    @invitem2 = create(:invoice_item, quantity: 10, unit_price: 2, invoice: @invoice, item: @item2)
-    @invitem3 = create(:invoice_item, quantity: 10, unit_price: 3, invoice: @invoice, item: @item3)
-    @invitem4 = create(:invoice_item, quantity: 10, unit_price: 4, invoice: @invoice, item: @item4)
-    @invitem5 = create(:invoice_item, quantity: 10, unit_price: 5, invoice: @invoice, item: @item5)
-    @invitem6 = create(:invoice_item, quantity: 10, unit_price: 6, invoice: @invoice, item: @item6)
+    @invitem1 = create(:invoice_item, quantity: 1000, unit_price: 100000, status:"packaged", invoice: @invoice, item: @item1)
+    @invitem2 = create(:invoice_item, quantity: 1000, unit_price: 200000, invoice: @invoice, item: @item2)
+    @invitem3 = create(:invoice_item, quantity: 1000, unit_price: 300000, invoice: @invoice, item: @item3)
+    @invitem4 = create(:invoice_item, quantity: 1000, unit_price: 400000, invoice: @invoice, item: @item4)
+    @invitem5 = create(:invoice_item, quantity: 1000, unit_price: 500000, invoice: @invoice, item: @item5)
+    @invitem6 = create(:invoice_item, quantity: 1000, unit_price: 600000, invoice: @invoice, item: @item6)
   end
   describe 'relationships' do
     it {should belong_to :merchant}
@@ -65,14 +65,14 @@ RSpec.describe Item, type: :model do
     describe '#invoice_item_price' do
       it 'should give the price the item sold at' do
 
-        expect(@item1.invoice_item_price(@invoice)).to eq(1)
+        expect(@item1.invoice_item_price(@invoice)).to eq(@invitem1.unit_price)
       end
     end
 
     describe '#invoice_item_quantity' do
       it 'should give the quantity of the item sold' do
 
-        expect(@item1.invoice_item_quantity(@invoice)).to eq(10)
+        expect(@item1.invoice_item_quantity(@invoice)).to eq(@invitem1.quantity)
       end
     end
 

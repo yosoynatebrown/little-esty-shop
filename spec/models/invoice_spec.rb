@@ -21,7 +21,7 @@ RSpec.describe Invoice, type: :model do
 
     describe '.highest_date' do
       it 'should return the date with the highest number of invoices' do
-        expect(Invoice.highest_date).to eq(@invoice2.created_at)
+        expect(Invoice.highest_date).to eq('2012-03-27 13:54:28.000000000 +0000')
       end
     end
 
@@ -30,7 +30,7 @@ RSpec.describe Invoice, type: :model do
         invoice_item1 = create(:invoice_item, invoice: @completed_invoice, status: 2)
         invoice_item2 = create(:invoice_item, invoice: @incomplete_invoice_1, status: 0)
         invoice_item2 = create(:invoice_item, invoice: @incomplete_invoice_2, status: 1)
-        expect(Invoice.incomplete_invoices).to eq([@incomplete_invoice_1, @incomplete_invoice_2])
+        expect(Invoice.incomplete_invoices).to include(@incomplete_invoice_1, @incomplete_invoice_2)
       end
     end
   end
