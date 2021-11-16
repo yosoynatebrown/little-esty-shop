@@ -5,7 +5,7 @@ class BulkDiscountValidator < ActiveModel::Validator
     better_discounts = lower_threshold_discounts.where('bulk_discounts.percent_discount >= ?', record.percent_discount)
     
     if better_discounts.any?
-      record.errors.add(:bulk_discount, "Your discount will never be applied due to an existing better or equally good discount. Try again.")
+      record.errors.add(:bulk_discount, "Your discount will never be applied due to an existing better (or equally good) discount. Try again, dum-dum.")
     end
   end
 

@@ -35,7 +35,7 @@ class Merchants::BulkDiscountsController < ApplicationController
         format.html { redirect_to bulk_discounts_path(@merchant), notice: "Bulk discount was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @bulk_discount.errors, status: :unprocessable_entity }
+        flash[:alert] = "Error: #{error_message(@bulk_discount.errors)}"
       end
     end
   end
