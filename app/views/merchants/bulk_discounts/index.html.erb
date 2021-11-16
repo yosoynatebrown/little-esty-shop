@@ -2,8 +2,8 @@
 
 <h1>Bulk Discounts</h1>
 
-<table>
-  <thead>
+<table class="table table-dark table-striped">
+  <thead class="thead-dark">
     <tr>
       <th>Name</th>
       <th>Percent discount</th>
@@ -15,10 +15,10 @@
   <tbody>
     <% @merchant.bulk_discounts.each do |bulk_discount| %>
       <tr>
-        <td><%= link_to "#{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %></td>
+        <td><strong><%= link_to "#{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %></strong></td>
         <td><%= "#{(bulk_discount.percent_discount * 100).to_i}%" %></td>
         <td><%= bulk_discount.quantity_threshold %></td>
-        <td><%= link_to "Delete #{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", method: :delete%></td>
+        <td><%= link_to "Delete #{bulk_discount.name}", "/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}", class:'btn btn-secondary btn-sm', method: :delete%></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,17 +26,18 @@
 
 <br>
 
-<%= link_to 'New Bulk Discount',  new_bulk_discount_path(@merchant) %>
-
+<%= link_to 'New Bulk Discount',  new_bulk_discount_path(@merchant), class:'btn btn-secondary btn-sm' %>
+<br>
+<br>
 <h3>Upcoming Holidays</h3>
 <ul>
 <% @holidays.each do |holiday|%>
-  <li><%= holiday %> 
+  <li><strong><%= holiday %></strong>
   <% holiday_discount = @merchant.find_holiday_discount(holiday)%>
   <% if holiday_discount.present? %>
-    <p><%= link_to 'View Discount', bulk_discount_path(holiday_discount) %></p>
+    <p><%= link_to 'View Discount', bulk_discount_path(holiday_discount), class:'btn btn-secondary btn-sm' %></p>
   <% else %>
-  <p><%= button_to "Create #{holiday} Discount", new_bulk_discount_path(@merchant), params:{ holiday_name: "#{holiday} discount", percent_discount: 0.3, quantity_threshold: 2 }, method: :get %></p></li>
+  <p><%= button_to "Create #{holiday} Discount", new_bulk_discount_path(@merchant), class:'btn btn-secondary btn-sm', params:{ holiday_name: "#{holiday} discount", percent_discount: 0.3, quantity_threshold: 2 }, method: :get %></p></li>
   <% end %>
 <% end %>
 </ul>

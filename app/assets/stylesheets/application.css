@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+body {
+  color: #d7d9db;
+  background-image: url('https://www.quoteinspector.com/media/money/money-qi05-wo.jpg'); 
+  font-family: Algerian;
+}
+
+#banner {
+     background-color: #6c757d;
+}
+
+.center {
+  padding: 10px 0;
+  text-indent: 15px;
+}

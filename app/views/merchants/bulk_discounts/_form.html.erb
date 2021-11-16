@@ -1,14 +1,19 @@
 <%= form_with model: bulk_discount, local: true do |f| %>
+  <div class="field form-group">
     <%= f.label :name %>
-    <%= f.text_field :name %>
-
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+  <div class="field form-group">
     <%= f.label :percent_discount %>
-    <%= f.text_field :percent_discount %>
+    <%= f.text_field :percent_discount, class: "form-control" %>
+  </div>
 
+  <div class="field form-group">
     <%= f.label :quantity_threshold %>
-    <%= f.number_field :quantity_threshold %>
+    <%= f.number_field :quantity_threshold, class: "form-control" %>
+  </div>
 
     <%= f.hidden_field :merchant_id, value: bulk_discount.merchant_id %>
 
-    <%= f.submit "Save"%>
+    <%= f.submit class:'btn btn-secondary'%>
 <% end %>
