@@ -20,8 +20,8 @@ RSpec.describe "bulk_discounts/edit", type: :view do
     fill_in 'Name', with: "Children's Discount"
     fill_in 'Percent discount', with: "0.1"
     fill_in 'Quantity threshold', with: "15"
-
-    click_button 'Save'
+    
+    click_button 'Update Bulk discount'
 
     expect(current_path).to eq("/merchants/#{@merchant.id}/bulk_discounts/#{@discount.id}")
     expect(page).to have_content("Children's Discount")
