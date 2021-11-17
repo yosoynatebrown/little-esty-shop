@@ -1,6 +1,8 @@
 # Little Esty Shop
 
 [Link to Page](https://quiet-sands-26565.herokuapp.com)
+![image](https://user-images.githubusercontent.com/77140183/142261077-97abfdfa-d20c-4a62-ad2b-f66c4d474674.png)
+
 
 ## Description
 
